@@ -45,6 +45,38 @@ namespace MyEShop.Services.ProductGroups
             return productGroup.Id;
         }
 
+        public async Task<IList<GetAllProductGroupDto>> GetAll()
+        {
+           return await _repository.GetAll();
+        }
+
+        public async Task<GetByIdProductGroupDto> GetById(int id)
+        {
+            var group = await _repository.FindById(id);
+            CheckedExistsProductGroup(group);
+
+            var subGroups = await _repository.FindAllByParentId(group.Id);
+
+            IList<SubGroupDto> SubGroupsDto = new List<SubGroupDto>();
+            foreach(var item in subGroups)
+            {
+                SubGroupsDto.Add(new SubGroupDto
+                {
+                    Id = item.Id,
+                    Title = item.Title
+                });
+            }
+
+            GetByIdProductGroupDto getByIdProductGroupDto = new GetByIdProductGroupDto()
+            {
+                Id = group.Id,
+                Title = group.Title,
+                SubGroupsDto = SubGroupsDto
+            };
+
+            return getByIdProductGroupDto;
+        }
+
         public async Task Update(int id,UpdateProductGroupDto dto)
         {
             var group = await _repository.FindById(id);

@@ -9,5 +9,7 @@ namespace MyEShop.Services.ProductGroups.Contracts
     {
         Task<int> Add(AddProductGroupDto dto);
         Task Update(int id,UpdateProductGroupDto dto);
+        Task<IList<GetAllProductGroupDto>> GetAll();
+        Task<GetByIdProductGroupDto> GetById(int id);
     }
 }
