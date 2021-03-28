@@ -8,5 +8,6 @@ namespace MyEShop.Services.ProductGroups.Contracts
     public interface ProductGroupServices
     {
         Task<int> Add(AddProductGroupDto dto);
+        Task Update(int id,UpdateProductGroupDto dto);
     }
 }

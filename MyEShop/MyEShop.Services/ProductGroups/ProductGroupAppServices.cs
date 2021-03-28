@@ -45,6 +45,20 @@ namespace MyEShop.Services.ProductGroups
             return productGroup.Id;
         }
 
+        public async Task Update(int id,UpdateProductGroupDto dto)
+        {
+            var group = await _repository.FindById(id);
+            CheckedExistsProductGroup(group);
+            if (dto.ParentId != 0)
+            {
+                group.Title = dto.Title;
+                group.ParentId = dto.ParentId;
+                await _unitOfWork.Complate();
+            }
+            group.Title = dto.Title;
+            await _unitOfWork.Complate();
+        }
+
         private void CheckedExistsProductGroup(ProductGroup productGroup)
         {
             if (productGroup == null)
