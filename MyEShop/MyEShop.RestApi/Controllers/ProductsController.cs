@@ -2,6 +2,7 @@
 using MyEShop.Services.Products;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -39,6 +40,12 @@ namespace MyEShop.RestApi.Controllers
         public async Task<GetByIdProductDto> GetById(int id)
         {
             return await _services.GetById(id);
+        }
+
+        [HttpGet("{filter}/{pageId}/{take}")]
+        public async Task<IList<GetAllProductDto>> GetAll(string filter,int pageId = 1, int take=1)
+        {
+            return await _services.GetAll(filter,pageId,take);
         }
     }
 }

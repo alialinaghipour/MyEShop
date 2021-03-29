@@ -11,5 +11,6 @@ namespace MyEShop.Services.Products
         Task Update(int id, UpdateProductDto dto);
         Task Delete(int id);
         Task<GetByIdProductDto> GetById(int id);
+        Task<IList<GetAllProductDto>> GetAll(string filter,int pageId, int take);
     }
 }

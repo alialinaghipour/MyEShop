@@ -11,5 +11,7 @@ namespace MyEShop.Services.Products
         void Add(Product product);
         Task<Product> FindById(int id);
         void Delete(Product product);
+        Task<IList<GetAllProductDto>> GetAll(string filter,int skip,int take);
+        Task<int> CountProductByFilter(string filter);
     }
 }
