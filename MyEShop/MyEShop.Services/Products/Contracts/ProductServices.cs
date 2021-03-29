@@ -10,5 +10,6 @@ namespace MyEShop.Services.Products
         Task<int> Add(AddProductDto dto);
         Task Update(int id, UpdateProductDto dto);
         Task Delete(int id);
+        Task<GetByIdProductDto> GetById(int id);
     }
 }

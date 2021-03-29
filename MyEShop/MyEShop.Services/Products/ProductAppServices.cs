@@ -61,5 +61,24 @@ namespace MyEShop.Services.Products
             _repository.Delete(product);
             await _unitofwork.Complate();
         }
+
+        public async Task<GetByIdProductDto> GetById(int id)
+        {
+            var product = await _repository.FindById(id);
+            CheckedExistsProduct(product);
+
+            GetByIdProductDto getByIdProductDto = new GetByIdProductDto()
+            {
+                Id = product.Id,
+                Text = product.Text,
+                ShortDescription = product.ShortDescription,
+                ImageName = product.ImageName,
+                Price = product.Price,
+                CreateData = product.CreateData,
+                Title = product.Title
+            };
+
+            return getByIdProductDto;
+        }
     }
 }

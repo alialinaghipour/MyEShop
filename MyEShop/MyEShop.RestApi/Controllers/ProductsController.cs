@@ -34,5 +34,11 @@ namespace MyEShop.RestApi.Controllers
         {
             await _services.Delete(id);
         }
+
+        [HttpGet("{id}")]
+        public async Task<GetByIdProductDto> GetById(int id)
+        {
+            return await _services.GetById(id);
+        }
     }
 }
