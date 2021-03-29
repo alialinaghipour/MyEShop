@@ -28,5 +28,11 @@ namespace MyEShop.RestApi.Controllers
         {
             await _services.Update(id, dto);
         }
+
+        [HttpDelete("{id}")]
+        public async Task Delete(int id)
+        {
+            await _services.Delete(id);
+        }
     }
 }

@@ -35,6 +35,7 @@ namespace MyEShop.Services.Products
             return product.Id;
         }
 
+
         public async Task Update(int id, UpdateProductDto dto)
         {
             var product = await _repository.FindById(id);
@@ -52,6 +53,13 @@ namespace MyEShop.Services.Products
             {
                 throw new ProductNotFoundExecption();
             }
+        }
+        public async Task Delete(int id)
+        {
+            var product = await _repository.FindById(id);
+            CheckedExistsProduct(product);
+            _repository.Delete(product);
+            await _unitofwork.Complate();
         }
     }
 }

@@ -23,6 +23,11 @@ namespace MyEShop.PersistenceEF.Products
             _set.Add(product);
         }
 
+        public void Delete(Product product)
+        {
+            _set.Remove(product);
+        }
+
         public async Task<Product> FindById(int id)
         {
             return await _set.FindAsync(id);

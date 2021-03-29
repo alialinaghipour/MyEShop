@@ -10,5 +10,6 @@ namespace MyEShop.Services.Products
     {
         void Add(Product product);
         Task<Product> FindById(int id);
+        void Delete(Product product);
     }
 }
