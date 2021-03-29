@@ -9,8 +9,10 @@ using Microsoft.Extensions.Logging;
 using MyEShop.Infrastructure.Application;
 using MyEShop.PersistenceEF;
 using MyEShop.PersistenceEF.ProdcutGroups;
+using MyEShop.PersistenceEF.Products;
 using MyEShop.Services.ProductGroups;
 using MyEShop.Services.ProductGroups.Contracts;
+using MyEShop.Services.Products;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,6 +43,9 @@ namespace MyEShop.RestApi
 
             services.AddScoped<ProductGroupRepository, EFProductGroupRepository>();
             services.AddScoped<ProductGroupServices, ProductGroupAppServices>();
+
+            services.AddScoped<ProductServices, ProductAppServices>();
+            services.AddScoped<ProductRepository, EFProductRepository>();
 
             services.AddSwaggerGen();
         }
