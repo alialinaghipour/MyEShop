@@ -63,5 +63,19 @@ namespace MyEShop.PersistenceEF.Products
                     Title = _.Title
                 }).ToListAsync();
         }
+
+        public async Task<IList<GetAllProductDto>> GetAll()
+        {
+            return await _set.Select(_ => new GetAllProductDto
+            {
+                ShortDescription = _.ShortDescription,
+                CreateData = _.CreateData,
+                Id = _.Id,
+                ImageName = _.ImageName,
+                Price = _.Price,
+                Text = _.Text,
+                Title = _.Title
+            }).ToListAsync();
+        }
     }
 }

@@ -47,5 +47,11 @@ namespace MyEShop.RestApi.Controllers
         {
             return await _services.GetAll(filter,pageId,take);
         }
+
+        [HttpGet]
+        public async Task<IList<GetAllProductDto>> GetAll()
+        {
+            return await _services.GetAll();
+        }
     }
 }

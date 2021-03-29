@@ -97,5 +97,10 @@ namespace MyEShop.Services.Products
 
             return await _repository.GetAll(filter,skip, take);
         }
+
+        public async Task<IList<GetAllProductDto>> GetAll()
+        {
+            return await _repository.GetAll();
+        }
     }
 }
