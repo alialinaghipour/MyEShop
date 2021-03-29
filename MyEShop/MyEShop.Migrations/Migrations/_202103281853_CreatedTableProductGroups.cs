@@ -14,7 +14,8 @@ namespace MyEShop.Migrations.Migrations
                 .WithColumn("Id").AsInt32().NotNullable().PrimaryKey().Identity()
                 .WithColumn("Title").AsString(150).NotNullable()
                 .WithColumn("ParentId").AsInt32().Nullable()
-                    .ForeignKey("FK_ProductGroups_ProductGroups", "ProductGroups", "Id");
+                    .ForeignKey("FK_ProductGroups_ProductGroups", "ProductGroups", "Id")
+                    .OnDelete(System.Data.Rule.None);
         }
 
         public override void Down()

@@ -25,25 +25,23 @@ namespace MyEShop.PersistenceEF.ProdcutGroups
             _set.Add(productGroup);
         }
 
-        public async Task<IList<ProductGroup>> FindAllByParentId(int id)
+        public void Delete(ProductGroup productGroup)
         {
-            return await _set.Where(_ => _.ParentId == id).ToListAsync();
+            _set.Remove(productGroup);
         }
 
         public async Task<ProductGroup> FindById(int id)
         {
-            return await _set.FindAsync(id);
+            return await _set.Where(_=>_.Id==id)
+                .Include(_=>_.ProductGroups).SingleOrDefaultAsync();
         }
 
-        public async Task<IList<GetAllProductGroupDto>> GetAll()
+        public async Task<IList<ProductGroup>> FindHeadGroups()
         {
             return await _set
-                .Where(_ => _.ParentId == null)
-                .Select(_ => new GetAllProductGroupDto()
-                {
-                    Id = _.Id,
-                    Title = _.Title
-                }).ToListAsync();
+                .Where(_ =>_.ParentId == null)
+                .Include(_=>_.ProductGroups)
+                .ToListAsync();
         }
     }
 }

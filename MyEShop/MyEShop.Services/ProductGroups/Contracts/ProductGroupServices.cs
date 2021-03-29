@@ -11,5 +11,6 @@ namespace MyEShop.Services.ProductGroups.Contracts
         Task Update(int id,UpdateProductGroupDto dto);
         Task<IList<GetAllProductGroupDto>> GetAll();
         Task<GetByIdProductGroupDto> GetById(int id);
+        Task Delete(int id);
     }
 }

@@ -14,12 +14,12 @@ namespace MyEShop.Services.ProductGroups
         private readonly UnitOfWork _unitOfWork;
         private readonly ProductGroupRepository _repository;
 
-        public ProductGroupAppServices(UnitOfWork unitOfWork,ProductGroupRepository repository)
+        public ProductGroupAppServices(UnitOfWork unitOfWork, ProductGroupRepository repository)
         {
             _unitOfWork = unitOfWork;
             _repository = repository;
         }
-        
+
         public async Task<int> Add(AddProductGroupDto dto)
         {
             ProductGroup productGroup;
@@ -30,7 +30,7 @@ namespace MyEShop.Services.ProductGroups
                 productGroup = new ProductGroup()
                 {
                     Title = dto.Title,
-                    ParentId=dto.ParentId
+                    ParentId = dto.ParentId
                 };
                 _repository.Add(productGroup);
                 await _unitOfWork.Complate();
@@ -45,9 +45,39 @@ namespace MyEShop.Services.ProductGroups
             return productGroup.Id;
         }
 
+        public async Task Delete(int id)
+        {
+            var group = await _repository.FindById(id);
+            CheckedExistsProductGroup(group);
+            CheckedHsaSubGroup(group.ProductGroups.Count);
+            _repository.Delete(group);
+            await _unitOfWork.Complate();
+        }
+
+        public void CheckedHsaSubGroup(int subGroupCount)
+        {
+            if (subGroupCount > 0)
+            {
+                throw new ProductGroupHasSubGroupException();
+            }
+        }
+
         public async Task<IList<GetAllProductGroupDto>> GetAll()
         {
-           return await _repository.GetAll();
+            var headGroups = await _repository.FindHeadGroups();
+
+            IList<GetAllProductGroupDto> getAllProductGroupDtos = new List<GetAllProductGroupDto>();
+
+            foreach (var item in headGroups)
+            {
+                getAllProductGroupDtos.Add(new GetAllProductGroupDto
+                {
+                    Id = item.Id,
+                    Title = item.Title,
+                    CountSubGroups = item.ProductGroups.Count
+                });
+            }
+            return getAllProductGroupDtos;
         }
 
         public async Task<GetByIdProductGroupDto> GetById(int id)
@@ -55,10 +85,8 @@ namespace MyEShop.Services.ProductGroups
             var group = await _repository.FindById(id);
             CheckedExistsProductGroup(group);
 
-            var subGroups = await _repository.FindAllByParentId(group.Id);
-
             IList<SubGroupDto> SubGroupsDto = new List<SubGroupDto>();
-            foreach(var item in subGroups)
+            foreach (var item in group.ProductGroups)
             {
                 SubGroupsDto.Add(new SubGroupDto
                 {
@@ -77,7 +105,7 @@ namespace MyEShop.Services.ProductGroups
             return getByIdProductGroupDto;
         }
 
-        public async Task Update(int id,UpdateProductGroupDto dto)
+        public async Task Update(int id, UpdateProductGroupDto dto)
         {
             var group = await _repository.FindById(id);
             CheckedExistsProductGroup(group);

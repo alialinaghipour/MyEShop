@@ -10,7 +10,7 @@ namespace MyEShop.Services.ProductGroups.Contracts
     {
         void Add(ProductGroup productGroup);
         Task<ProductGroup> FindById(int id);
-        Task<IList<GetAllProductGroupDto>> GetAll();
-        Task<IList<ProductGroup>> FindAllByParentId(int id);
+        void Delete(ProductGroup productGroup);
+        Task<IList<ProductGroup>> FindHeadGroups();
     }
 }

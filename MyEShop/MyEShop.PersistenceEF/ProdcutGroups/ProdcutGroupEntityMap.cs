@@ -20,6 +20,11 @@ namespace MyEShop.PersistenceEF.ProdcutGroups
             _.Property(_ => _.Title).IsRequired().HasMaxLength(150);
 
             _.Property(_ => _.ParentId).IsRequired(false);
+
+            _.HasOne(_ => _.ProductGroup1)
+                .WithMany(_ => _.ProductGroups)
+                .HasForeignKey(_ => _.ParentId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }
