@@ -4,6 +4,7 @@ using MyEShop.Services.Products;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace MyEShop.PersistenceEF.Products
 {
@@ -20,6 +21,11 @@ namespace MyEShop.PersistenceEF.Products
         public void Add(Product product)
         {
             _set.Add(product);
+        }
+
+        public async Task<Product> FindById(int id)
+        {
+            return await _set.FindAsync(id);
         }
     }
 }

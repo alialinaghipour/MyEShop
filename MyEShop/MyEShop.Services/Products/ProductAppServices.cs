@@ -1,5 +1,6 @@
 ﻿using MyEShop.Entities;
 using MyEShop.Infrastructure.Application;
+using MyEShop.Services.Products.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -32,6 +33,25 @@ namespace MyEShop.Services.Products
             _repository.Add(product);
             await _unitofwork.Complate();
             return product.Id;
+        }
+
+        public async Task Update(int id, UpdateProductDto dto)
+        {
+            var product = await _repository.FindById(id);
+            CheckedExistsProduct(product);
+            product.Title = dto.Title;
+            product.ShortDescription = dto.ShortDescription;
+            product.Text = dto.Text;
+            product.Price = dto.Price;
+            await _unitofwork.Complate();
+        }
+
+        private void CheckedExistsProduct(Product product)
+        {
+            if (product == null)
+            {
+                throw new ProductNotFoundExecption();
+            }
         }
     }
 }
