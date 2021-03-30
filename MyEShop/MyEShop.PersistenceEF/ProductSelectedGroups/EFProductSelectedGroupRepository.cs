@@ -23,6 +23,16 @@ namespace MyEShop.PersistenceEF.ProductSelectedGroups
             _set.Add(productSelectedGroup);
         }
 
+        public void Delete(ProductSelectedGroup productSelectedGroup)
+        {
+            _set.Remove(productSelectedGroup);
+        }
+
+        public async Task<ProductSelectedGroup> FindById(int id)
+        {
+            return await _set.FindAsync(id);
+        }
+
         public async Task<bool> IsExistsByProductIdAndGroupId(int productId, int groupId)
         {
             return await _set.AnyAsync(_ => _.ProductId == productId && _.ProductGroupId == groupId);

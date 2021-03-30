@@ -10,5 +10,7 @@ namespace MyEShop.Services.ProductSelectedGroups
     {
         void Add(ProductSelectedGroup productSelectedGroup);
         Task<bool> IsExistsByProductIdAndGroupId(int productId, int groupId);
+        void Delete(ProductSelectedGroup productSelectedGroup);
+        Task<ProductSelectedGroup> FindById(int id);
     }
 }

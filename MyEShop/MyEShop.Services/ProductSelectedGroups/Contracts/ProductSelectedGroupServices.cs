@@ -8,5 +8,6 @@ namespace MyEShop.Services.ProductSelectedGroups
     public interface ProductSelectedGroupServices
     {
         Task<int> Add(AddProdcutSelectedGroupDto dto);
+        Task Delete(int id);
     }
 }

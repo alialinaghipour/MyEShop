@@ -48,6 +48,7 @@ namespace MyEShop.Services.ProductSelectedGroups
             return productSelectedGroup.Id;
         }
 
+
         private async Task CheckedExistsProduct(int producId)
         {
             if (!await _productRepository.IsExistsById(producId))
@@ -69,6 +70,21 @@ namespace MyEShop.Services.ProductSelectedGroups
             if (await _repository.IsExistsByProductIdAndGroupId(productId, groupId))
             {
                 throw new ExistsProductIdToGroupIdException();
+            }
+        }
+        public async Task Delete(int id)
+        {
+            var productSelectedgroup = await _repository.FindById(id);
+            CheckdExistsProductSelectedGroup(productSelectedgroup);
+            _repository.Delete(productSelectedgroup);
+            await _unitOfWork.Complate();
+        }
+
+        private void CheckdExistsProductSelectedGroup(ProductSelectedGroup productSelectedGroup)
+        {
+            if (productSelectedGroup == null)
+            {
+                throw new ProductSelectedGroupNotFoundException();
             }
         }
     }
