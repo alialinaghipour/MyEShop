@@ -10,6 +10,7 @@ namespace MyEShop.Entities
         public Product()
         {
             ProductSelectedGroups = new HashSet<ProductSelectedGroup>();
+            ProductGalleries = new HashSet<ProductGallery>();
         }
 
         public int Id { get; set; }
@@ -21,5 +22,6 @@ namespace MyEShop.Entities
         public DateTime CreateData { get; set; }
 
         public HashSet<ProductSelectedGroup> ProductSelectedGroups { get; set; }
+        public HashSet<ProductGallery> ProductGalleries { get; set; }
     }
 }
