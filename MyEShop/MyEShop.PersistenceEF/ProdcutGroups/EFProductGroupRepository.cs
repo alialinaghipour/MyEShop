@@ -43,5 +43,10 @@ namespace MyEShop.PersistenceEF.ProdcutGroups
                 .Include(_=>_.ProductGroups)
                 .ToListAsync();
         }
+
+        public async Task<bool> IsExistsById(int id)
+        {
+            return await _set.AnyAsync(_ => _.Id == id);
+        }
     }
 }

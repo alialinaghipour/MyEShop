@@ -14,5 +14,6 @@ namespace MyEShop.Services.Products
         Task<IList<GetAllProductDto>> GetAll(string filter,int skip,int take);
         Task<int> CountProductByFilter(string filter);
         Task<IList<GetAllProductDto>> GetAll();
+        Task<bool> IsExistsById(int id);
     }
 }

@@ -77,5 +77,10 @@ namespace MyEShop.PersistenceEF.Products
                 Title = _.Title
             }).ToListAsync();
         }
+
+        public async Task<bool> IsExistsById(int id)
+        {
+            return await _set.AnyAsync(_ => _.Id == id);
+        }
     }
 }

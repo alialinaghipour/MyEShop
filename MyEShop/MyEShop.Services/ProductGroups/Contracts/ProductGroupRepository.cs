@@ -12,5 +12,7 @@ namespace MyEShop.Services.ProductGroups.Contracts
         Task<ProductGroup> FindById(int id);
         void Delete(ProductGroup productGroup);
         Task<IList<ProductGroup>> FindHeadGroups();
+        Task<bool> IsExistsById(int id);
+
     }
 }
