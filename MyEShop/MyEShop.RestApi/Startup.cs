@@ -9,8 +9,10 @@ using Microsoft.Extensions.Logging;
 using MyEShop.Infrastructure.Application;
 using MyEShop.PersistenceEF;
 using MyEShop.PersistenceEF.ProdcutGroups;
+using MyEShop.PersistenceEF.ProductGalleries;
 using MyEShop.PersistenceEF.Products;
 using MyEShop.PersistenceEF.ProductSelectedGroups;
+using MyEShop.Services.ProductGalleries;
 using MyEShop.Services.ProductGroups;
 using MyEShop.Services.ProductGroups.Contracts;
 using MyEShop.Services.Products;
@@ -51,6 +53,9 @@ namespace MyEShop.RestApi
 
             services.AddScoped<ProductSelectedGroupServices, ProductSelectedGroupAppServices>();
             services.AddScoped<ProductSelectedGroupRepository, EFProductSelectedGroupRepository>();
+
+            services.AddScoped<ProductGalleryRepository, EFProductGalleryRepository>();
+            services.AddScoped<ProductGalleryServices, ProductGalleryAppServices>();
 
             services.AddSwaggerGen();
         }
