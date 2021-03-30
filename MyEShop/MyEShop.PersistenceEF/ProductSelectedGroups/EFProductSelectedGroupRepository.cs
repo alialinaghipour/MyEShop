@@ -3,6 +3,7 @@ using MyEShop.Entities;
 using MyEShop.Services.ProductSelectedGroups;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -31,6 +32,21 @@ namespace MyEShop.PersistenceEF.ProductSelectedGroups
         public async Task<ProductSelectedGroup> FindById(int id)
         {
             return await _set.FindAsync(id);
+        }
+
+        public async Task<IList<GetAllProductSelectedGroupDto>> GetAll()
+        {
+            return await _set
+                .Include(_ => _.Product)
+                .Include(_ => _.ProductGroup)
+                .Select(_ => new GetAllProductSelectedGroupDto
+                {
+                    Id = _.Id,
+                    ProductId = _.ProductId,
+                    ProductTitle = _.Product.Title,
+                    ProductGroupId = _.ProductGroupId,
+                    GroupTitle = _.ProductGroup.Title
+                }).ToListAsync();
         }
 
         public async Task<bool> IsExistsByProductIdAndGroupId(int productId, int groupId)

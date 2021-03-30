@@ -9,5 +9,7 @@ namespace MyEShop.Services.ProductSelectedGroups
     {
         Task<int> Add(AddProdcutSelectedGroupDto dto);
         Task Delete(int id);
+        Task<IList<GetAllProductSelectedGroupDto>> GetAll();
+
     }
 }

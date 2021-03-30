@@ -28,5 +28,11 @@ namespace MyEShop.RestApi.Controllers
         {
              await _services.Delete(id);
         }
+
+        [HttpGet]
+        public async Task<IList<GetAllProductSelectedGroupDto>> GetAll()
+        {
+            return await _services.GetAll();
+        }
     }
 }

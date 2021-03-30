@@ -12,5 +12,6 @@ namespace MyEShop.Services.ProductSelectedGroups
         Task<bool> IsExistsByProductIdAndGroupId(int productId, int groupId);
         void Delete(ProductSelectedGroup productSelectedGroup);
         Task<ProductSelectedGroup> FindById(int id);
+        Task<IList<GetAllProductSelectedGroupDto>> GetAll();
     }
 }

@@ -87,5 +87,10 @@ namespace MyEShop.Services.ProductSelectedGroups
                 throw new ProductSelectedGroupNotFoundException();
             }
         }
+
+        public async Task<IList<GetAllProductSelectedGroupDto>> GetAll()
+        {
+            return await _repository.GetAll();
+        }
     }
 }
