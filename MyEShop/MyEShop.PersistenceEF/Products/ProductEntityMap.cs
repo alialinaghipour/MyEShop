@@ -7,7 +7,7 @@ using MyEShop.Entities;
 
 namespace MyEShop.PersistenceEF.Products
 {
-    public class ProductEntityMap : IEntityTypeConfiguration<Product>
+    class ProductEntityMap : IEntityTypeConfiguration<Product>
     {
         public void Configure(EntityTypeBuilder<Product> _)
         {
