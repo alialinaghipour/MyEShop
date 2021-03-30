@@ -1,5 +1,6 @@
 ﻿using MyEShop.Entities;
 using MyEShop.Infrastructure.Application;
+using MyEShop.Services.ProductGalleries.Exceptions;
 using MyEShop.Services.Products;
 using MyEShop.Services.Products.Exceptions;
 using System;
@@ -46,6 +47,23 @@ namespace MyEShop.Services.ProductGalleries
             if (!await _productRepository.IsExistsById(producId))
             {
                 throw new ProductNotFoundExecption();
+            }
+        }
+
+        public async Task Delete(int id)
+        {
+            var productGallery = await _repository.FindById(id);
+            CheckedExistsProductGallery(productGallery);
+
+            _repository.Delete(productGallery);
+            await _unitOfWork.Complate();
+        }
+
+        private void CheckedExistsProductGallery(ProductGallery productGallery)
+        {
+            if (productGallery == null)
+            {
+                throw new ProductGalleryNotFoundException();
             }
         }
     }

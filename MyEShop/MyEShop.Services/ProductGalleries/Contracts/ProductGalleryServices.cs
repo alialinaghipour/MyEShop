@@ -8,5 +8,6 @@ namespace MyEShop.Services.ProductGalleries
     public interface ProductGalleryServices
     {
         Task<int> Add(AddProductGalleryDto dto);
+        Task Delete(int id);
     }
 }
