@@ -8,5 +8,6 @@ namespace MyEShop.Services.Features
     public interface FeatureServices
     {
         Task<int> Add(AddFeatureDto dto);
+        Task Update(int id,UpdateFeatureDto dto);
     }
 }

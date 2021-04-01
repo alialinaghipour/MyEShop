@@ -4,6 +4,7 @@ using MyEShop.Services.Features;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace MyEShop.PersistenceEF.Features
 {
@@ -21,6 +22,13 @@ namespace MyEShop.PersistenceEF.Features
         public void Add(Feature feature)
         {
             _set.Add(feature);
+        }
+
+        public async Task<Feature> FindById(int id)
+        {
+            return await _set
+                .Include(_ => _.ProductFeatures)
+                .SingleOrDefaultAsync(_ => _.Id == id);
         }
     }
 }

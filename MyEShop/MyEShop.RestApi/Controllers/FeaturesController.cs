@@ -22,5 +22,11 @@ namespace MyEShop.RestApi.Controllers
         {
             return await _services.Add(dto);
         }
+
+        [HttpPut("{id}")]
+        public async Task Update(int id,UpdateFeatureDto dto)
+        {
+            await _services.Update(id, dto);
+        }
     }
 }
