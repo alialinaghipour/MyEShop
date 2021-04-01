@@ -35,7 +35,6 @@ namespace MyEShop.Services.ProductSelectedGroups
         {
             await CheckedExistsProduct(dto.ProductId);
             await CheckedExistsProductGroup(dto.ProductGroupId);
-            await CheckedExistsProductIdAndGroupId(dto.ProductId, dto.ProductGroupId);
 
             ProductSelectedGroup productSelectedGroup = new ProductSelectedGroup()
             {
