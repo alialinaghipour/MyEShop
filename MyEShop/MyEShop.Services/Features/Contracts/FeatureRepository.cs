@@ -11,5 +11,6 @@ namespace MyEShop.Services.Features
         void Add(Feature feature);
         Task<Feature> FindById(int id);
         Task<IList<GetAllFeatureDto>> GetAll();
+        void Delete(Feature feature);
     }
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MyEShop.RestApi.Controllers
 {
-    [ApiController,Route("api/features")]
+    [ApiController, Route("api/features")]
     public class FeaturesController : Controller
     {
         private readonly FeatureServices _services;
@@ -24,7 +24,7 @@ namespace MyEShop.RestApi.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task Update(int id,UpdateFeatureDto dto)
+        public async Task Update(int id, UpdateFeatureDto dto)
         {
             await _services.Update(id, dto);
         }
@@ -33,6 +33,12 @@ namespace MyEShop.RestApi.Controllers
         public async Task<IList<GetAllFeatureDto>> GetAll()
         {
             return await _services.GetAll();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task Delete(int id)
+        {
+            await _services.Delete(id);
         }
     }
 }

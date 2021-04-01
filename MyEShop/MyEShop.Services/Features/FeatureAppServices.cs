@@ -13,7 +13,7 @@ namespace MyEShop.Services.Features
         private readonly UnitOfWork _unitOfWork;
         private readonly FeatureRepository _repository;
 
-        public FeatureAppServices(UnitOfWork unitOfWork,FeatureRepository repository)
+        public FeatureAppServices(UnitOfWork unitOfWork, FeatureRepository repository)
         {
             _unitOfWork = unitOfWork;
             _repository = repository;
@@ -30,12 +30,13 @@ namespace MyEShop.Services.Features
             return feature.Id;
         }
 
+
         public async Task<IList<GetAllFeatureDto>> GetAll()
         {
             return await _repository.GetAll();
         }
 
-        public async Task Update(int id,UpdateFeatureDto dto)
+        public async Task Update(int id, UpdateFeatureDto dto)
         {
             var feature = await _repository.FindById(id);
             CheckedExistsFeature(feature);
@@ -48,6 +49,22 @@ namespace MyEShop.Services.Features
             if (feature == null)
             {
                 throw new FeatureNotFoundException();
+            }
+        }
+        public async Task Delete(int id)
+        {
+            var feature = await _repository.FindById(id);
+            CheckedExistsFeature(feature);
+            CheckedProductFeatureToFeature(feature.ProductFeatures.Count);
+            _repository.Delete(feature);
+            await _unitOfWork.Complate();
+        }
+
+        public void CheckedProductFeatureToFeature(int productFeatureCount)
+        {
+            if (productFeatureCount > 0)
+            {
+                throw new FeatureNotDeleteException();
             }
         }
     }
