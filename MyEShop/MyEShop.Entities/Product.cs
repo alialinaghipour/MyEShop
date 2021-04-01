@@ -12,6 +12,7 @@ namespace MyEShop.Entities
             ProductSelectedGroups = new HashSet<ProductSelectedGroup>();
             ProductGalleries = new HashSet<ProductGallery>();
             ProductTags = new HashSet<ProductTag>();
+            ProductFeatures = new HashSet<ProductFeature>();
         }
 
         public int Id { get; set; }
@@ -25,5 +26,6 @@ namespace MyEShop.Entities
         public HashSet<ProductSelectedGroup> ProductSelectedGroups { get; set; }
         public HashSet<ProductGallery> ProductGalleries { get; set; }
         public HashSet<ProductTag> ProductTags { get; set; }
+        public HashSet<ProductFeature> ProductFeatures { get; set; }
     }
 }
