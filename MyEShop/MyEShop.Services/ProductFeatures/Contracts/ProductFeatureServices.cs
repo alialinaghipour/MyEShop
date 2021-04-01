@@ -9,5 +9,6 @@ namespace MyEShop.Services.ProductFeatures
     {
         Task<IList<GetByProductIdProductFeatureDto>> GetByProductId(int productId);
         Task<int> Add(int productId, AddProductFeatureDto dto);
+        Task Delete(int id);
     }
 }

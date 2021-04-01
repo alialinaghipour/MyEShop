@@ -24,6 +24,16 @@ namespace MyEShop.PersistenceEF.ProductFeatures
             _set.Add(productFeature);
         }
 
+        public void Delete(ProductFeature productFeature)
+        {
+            _set.Remove(productFeature);
+        }
+
+        public async Task<ProductFeature> FindById(int id)
+        {
+            return await _set.FindAsync(id);
+        }
+
         public async Task<IList<GetByProductIdProductFeatureDto>> GetByProductId(int productId)
         {
             return await _set

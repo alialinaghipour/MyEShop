@@ -44,6 +44,7 @@ namespace MyEShop.PersistenceEF.Products
                 .Include(_=>_.ProductSelectedGroups)
                 .Include(_=>_.ProductTags)
                 .Include(_=>_.ProductGalleries)
+                .Include(_=>_.ProductFeatures)
                 .SingleOrDefaultAsync(_=>_.Id==id);
         }
 

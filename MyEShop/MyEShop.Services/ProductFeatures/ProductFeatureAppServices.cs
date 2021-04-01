@@ -2,6 +2,7 @@
 using MyEShop.Infrastructure.Application;
 using MyEShop.Services.Features;
 using MyEShop.Services.Features.Exceptions;
+using MyEShop.Services.ProductFeatures.Exceptions;
 using MyEShop.Services.Products;
 using MyEShop.Services.Products.Exceptions;
 using System;
@@ -43,6 +44,22 @@ namespace MyEShop.Services.ProductFeatures
             _repository.Add(productFeature);
             await _unitOfWork.Complate();
             return productFeature.Id;
+        }
+
+        public async Task Delete(int id)
+        {
+            var productFeature = await _repository.FindById(id);
+            CheckedExistsProductFeature(productFeature);
+            _repository.Delete(productFeature);
+            await _unitOfWork.Complate();
+        }
+
+        private void CheckedExistsProductFeature(ProductFeature productFeature)
+        {
+            if (productFeature == null)
+            {
+                throw new ProductFeatureNotFoundException();
+            }
         }
 
         public async Task<IList<GetByProductIdProductFeatureDto>> GetByProductId(int productId)
