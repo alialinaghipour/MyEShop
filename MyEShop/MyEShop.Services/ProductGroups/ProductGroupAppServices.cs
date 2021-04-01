@@ -45,22 +45,7 @@ namespace MyEShop.Services.ProductGroups
             return productGroup.Id;
         }
 
-        public async Task Delete(int id)
-        {
-            var group = await _repository.FindById(id);
-            CheckedExistsProductGroup(group);
-            CheckedHsaSubGroup(group.ProductGroups.Count);
-            _repository.Delete(group);
-            await _unitOfWork.Complate();
-        }
 
-        public void CheckedHsaSubGroup(int subGroupCount)
-        {
-            if (subGroupCount > 0)
-            {
-                throw new ProductGroupHasSubGroupException();
-            }
-        }
 
         public async Task<IList<GetAllProductGroupDto>> GetAll()
         {
@@ -124,6 +109,26 @@ namespace MyEShop.Services.ProductGroups
             if (productGroup == null)
             {
                 throw new ProductGroupNotFoundException();
+            }
+        }
+
+        public async Task Delete(int id)
+        {
+            var group = await _repository.FindById(id);
+            CheckedExistsProductGroup(group);
+
+            CheckedHasSubGroupOrToProductSelectedGroups
+                (group.ProductGroups.Count,group.ProductSelectedGroups.Count);
+
+            _repository.Delete(group);
+            await _unitOfWork.Complate();
+        }
+
+        private void CheckedHasSubGroupOrToProductSelectedGroups(int subGroupCount,int selectCount)
+        {
+            if (subGroupCount > 0 || selectCount > 0)
+            {
+                throw new ProductGroupNotDeleteException();
             }
         }
     }

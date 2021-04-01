@@ -32,8 +32,11 @@ namespace MyEShop.PersistenceEF.ProdcutGroups
 
         public async Task<ProductGroup> FindById(int id)
         {
-            return await _set.Where(_=>_.Id==id)
-                .Include(_=>_.ProductGroups).SingleOrDefaultAsync();
+            return await _set
+                .Where(_=>_.Id==id)
+                .Include(_=>_.ProductGroups)
+                .Include(_=>_.ProductSelectedGroups)
+                .SingleOrDefaultAsync();
         }
 
         public async Task<IList<ProductGroup>> FindHeadGroups()

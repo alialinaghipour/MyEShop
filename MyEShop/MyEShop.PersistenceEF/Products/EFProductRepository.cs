@@ -43,6 +43,7 @@ namespace MyEShop.PersistenceEF.Products
             return await _set
                 .Include(_=>_.ProductSelectedGroups)
                 .Include(_=>_.ProductTags)
+                .Include(_=>_.ProductGalleries)
                 .SingleOrDefaultAsync(_=>_.Id==id);
         }
 

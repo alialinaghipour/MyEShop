@@ -24,7 +24,7 @@ namespace MyEShop.PersistenceEF.ProductSelectedGroups
             _.HasOne(_ => _.Product)
                 .WithMany(_ => _.ProductSelectedGroups)
                 .HasForeignKey(_ => _.ProductId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Cascade);
 
             _.HasOne(_ => _.ProductGroup)
                .WithMany(_ => _.ProductSelectedGroups)

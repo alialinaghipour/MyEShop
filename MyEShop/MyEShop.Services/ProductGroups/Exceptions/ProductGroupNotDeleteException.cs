@@ -4,7 +4,7 @@ using System.Text;
 
 namespace MyEShop.Services.ProductGroups.Exceptions
 {
-    class ProductGroupHasSubGroupException:Exception
+    class ProductGroupNotDeleteException:Exception
     {
     }
 }
