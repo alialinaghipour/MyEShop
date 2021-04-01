@@ -40,7 +40,10 @@ namespace MyEShop.PersistenceEF.Products
 
         public async Task<Product> FindById(int id)
         {
-            return await _set.FindAsync(id);
+            return await _set
+                .Include(_=>_.ProductSelectedGroups)
+                .Include(_=>_.ProductTags)
+                .SingleOrDefaultAsync(_=>_.Id==id);
         }
 
         public async Task<IList<GetAllProductDto>> GetAll(string filter,int skip, int take)

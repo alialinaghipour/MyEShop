@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace MyEShop.Services.Products
 {
@@ -15,5 +16,11 @@ namespace MyEShop.Services.Products
 
         [Required]
         public int Price { get; set; }
+
+        [Required]
+        public IList<ProductSelectedGroupDto> ProductSelectedGroupDtos { get; set; }
+
+        [Required]
+        public string ProductTags { get; set; }
     }
 }

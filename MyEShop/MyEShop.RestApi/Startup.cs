@@ -12,11 +12,13 @@ using MyEShop.PersistenceEF.ProdcutGroups;
 using MyEShop.PersistenceEF.ProductGalleries;
 using MyEShop.PersistenceEF.Products;
 using MyEShop.PersistenceEF.ProductSelectedGroups;
+using MyEShop.PersistenceEF.ProductTags;
 using MyEShop.Services.ProductGalleries;
 using MyEShop.Services.ProductGroups;
 using MyEShop.Services.ProductGroups.Contracts;
 using MyEShop.Services.Products;
 using MyEShop.Services.ProductSelectedGroups;
+using MyEShop.Services.ProductTags;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -56,6 +58,8 @@ namespace MyEShop.RestApi
 
             services.AddScoped<ProductGalleryRepository, EFProductGalleryRepository>();
             services.AddScoped<ProductGalleryServices, ProductGalleryAppServices>();
+
+            services.AddScoped<ProductTagRepository, EFProductTagRepository>();
 
             services.AddSwaggerGen();
         }

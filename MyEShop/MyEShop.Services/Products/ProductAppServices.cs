@@ -5,6 +5,7 @@ using MyEShop.Services.ProductGroups.Exceptions;
 using MyEShop.Services.Products.Exceptions;
 using MyEShop.Services.ProductSelectedGroups;
 using MyEShop.Services.ProductSelectedGroups.Exceptions;
+using MyEShop.Services.ProductTags;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -19,17 +20,20 @@ namespace MyEShop.Services.Products
         private readonly ProductRepository _repository;
         private readonly ProductGroupRepository _productGroupRepository;
         private readonly ProductSelectedGroupRepository _productSelectedGroupRepository;
+        private readonly ProductTagRepository _productTagRepository;
 
         public ProductAppServices(
             UnitOfWork unitofwork,
             ProductRepository repository,
             ProductGroupRepository productGroupRepository,
-            ProductSelectedGroupRepository productSelectedGroupRepository)
+            ProductSelectedGroupRepository productSelectedGroupRepository,
+            ProductTagRepository productTagRepository)
         {
             _unitofwork = unitofwork;
             _repository = repository;
             _productGroupRepository = productGroupRepository;
             _productSelectedGroupRepository = productSelectedGroupRepository;
+            _productTagRepository = productTagRepository;
         }
         public async Task<int> Add(AddProductDto dto)
         {
@@ -98,7 +102,30 @@ namespace MyEShop.Services.Products
             product.ShortDescription = dto.ShortDescription;
             product.Text = dto.Text;
             product.Price = dto.Price;
+
+            DeleteProductSelectedGroups(product.ProductSelectedGroups);
+            await AddProductSelectedGroups(dto.ProductSelectedGroupDtos, product);
+
+            DeleteProductTags(product.ProductTags);
+            AddProductTags(product, dto.ProductTags.Split(','));
+
             await _unitofwork.Complate();
+        }
+
+        private void DeleteProductTags(HashSet<ProductTag> productTags)
+        {
+            foreach (var item in productTags)
+            {
+                _productTagRepository.Delete(item);
+            }
+        }
+
+        private void DeleteProductSelectedGroups(HashSet<ProductSelectedGroup> productSelectedGroups)
+        {
+            foreach (var item in productSelectedGroups)
+            {
+                _productSelectedGroupRepository.Delete(item);
+            }
         }
 
         private void CheckedExistsProduct(Product product)
