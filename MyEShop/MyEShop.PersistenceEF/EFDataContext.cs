@@ -32,5 +32,6 @@ namespace MyEShop.PersistenceEF
         public DbSet<ProductTag> ProductTags { get; set; }
         public DbSet<Feature> Features { get; set; }
         public DbSet<ProductFeature> ProductFeatures { get; set; }
+        public DbSet<ProductComment> ProductComments { get; set; }
     }
 }

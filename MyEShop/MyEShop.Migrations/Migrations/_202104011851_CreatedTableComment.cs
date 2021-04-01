@@ -16,7 +16,7 @@ namespace MyEShop.Migrations.Migrations
                 .WithColumn("Name").AsString(50).NotNullable()
                 .WithColumn("Email").AsString(250).NotNullable()
                 .WithColumn("Comment").AsString(800).NotNullable()
-                .WithColumn("CreateDate").AsInt32().NotNullable().WithDefaultValue(DateTime.Now)
+                .WithColumn("CreateDate").AsDateTime().NotNullable().WithDefaultValue(DateTime.Now)
                 .WithColumn("ParentId").AsInt32().Nullable()
                     .ForeignKey("FK_ProductComments_ProductComments", "ProductComments", "Id")
                         .OnDelete(System.Data.Rule.None)
