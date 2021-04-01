@@ -30,5 +30,7 @@ namespace MyEShop.PersistenceEF
         public DbSet<ProductSelectedGroup> ProductSelectedGroups { get; set; }
         public DbSet<ProductGallery> ProductGalleries { get; set; }
         public DbSet<ProductTag> ProductTags { get; set; }
+        public DbSet<Feature> Features { get; set; }
+        public DbSet<ProductFeature> ProductFeatures { get; set; }
     }
 }
