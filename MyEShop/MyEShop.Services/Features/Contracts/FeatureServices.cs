@@ -9,5 +9,7 @@ namespace MyEShop.Services.Features
     {
         Task<int> Add(AddFeatureDto dto);
         Task Update(int id,UpdateFeatureDto dto);
+        Task<IList<GetAllFeatureDto>> GetAll();
+
     }
 }

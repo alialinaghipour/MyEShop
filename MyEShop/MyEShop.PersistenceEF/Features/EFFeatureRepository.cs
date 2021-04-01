@@ -3,6 +3,7 @@ using MyEShop.Entities;
 using MyEShop.Services.Features;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -29,6 +30,16 @@ namespace MyEShop.PersistenceEF.Features
             return await _set
                 .Include(_ => _.ProductFeatures)
                 .SingleOrDefaultAsync(_ => _.Id == id);
+        }
+
+        public async Task<IList<GetAllFeatureDto>> GetAll()
+        {
+            return await _set
+                .Select(_ => new GetAllFeatureDto
+                {
+                    Id = _.Id,
+                    Title = _.Title
+                }).ToListAsync();
         }
     }
 }

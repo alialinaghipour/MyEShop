@@ -30,6 +30,11 @@ namespace MyEShop.Services.Features
             return feature.Id;
         }
 
+        public async Task<IList<GetAllFeatureDto>> GetAll()
+        {
+            return await _repository.GetAll();
+        }
+
         public async Task Update(int id,UpdateFeatureDto dto)
         {
             var feature = await _repository.FindById(id);

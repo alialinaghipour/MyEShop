@@ -28,5 +28,11 @@ namespace MyEShop.RestApi.Controllers
         {
             await _services.Update(id, dto);
         }
+
+        [HttpGet]
+        public async Task<IList<GetAllFeatureDto>> GetAll()
+        {
+            return await _services.GetAll();
+        }
     }
 }
