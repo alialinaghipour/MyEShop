@@ -12,5 +12,6 @@ namespace MyEShop.Services.Features
         Task<Feature> FindById(int id);
         Task<IList<GetAllFeatureDto>> GetAll();
         void Delete(Feature feature);
+        Task<bool> IsExistsById(int id);
     }
 }
