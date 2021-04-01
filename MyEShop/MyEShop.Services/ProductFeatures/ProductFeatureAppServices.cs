@@ -45,6 +45,16 @@ namespace MyEShop.Services.ProductFeatures
             return productFeature.Id;
         }
 
+        public async Task<IList<GetByProductIdProductFeatureDto>> GetByProductId(int productId)
+        {
+            var product = await _productRepository.FindById(productId);
+            if (product == null)
+            {
+                throw new ProductNotFoundExecption();
+            }
+            return await _repository.GetByProductId(productId);
+        }
+
         private async Task CheckedExistsFeature(int featureId)
         {
             if (!await _featureRepository.IsExistsById(featureId))

@@ -22,5 +22,11 @@ namespace MyEShop.RestApi.Controllers
         {
             return await _services.Add(productId, dto);
         }
+
+        [HttpGet("{productId}")]
+        public async Task<IList<GetByProductIdProductFeatureDto>> GetByProductId(int productId)
+        {
+            return await _services.GetByProductId(productId);
+        }
     }
 }
