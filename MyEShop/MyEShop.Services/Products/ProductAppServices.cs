@@ -163,9 +163,11 @@ namespace MyEShop.Services.Products
             return getByIdProductDto;
         }
 
-        public async Task<IList<GetAllProductDto>> GetAll(string filter, int pageId,int take)
+        public async Task<IList<GetAllProductDto>> GetAll(string filter, int pageId)
         {
             int countProducts = await _repository.CountProductByFilter(filter);
+
+            int take = 2;
 
             if (take > countProducts)
                 take = (int)Math.Ceiling((double)countProducts / 2);
@@ -178,11 +180,6 @@ namespace MyEShop.Services.Products
             int skip = (pageId - 1) * take;
 
             return await _repository.GetAll(filter,skip, take);
-        }
-
-        public async Task<IList<GetAllProductDto>> GetAll()
-        {
-            return await _repository.GetAll();
         }
     }
 }

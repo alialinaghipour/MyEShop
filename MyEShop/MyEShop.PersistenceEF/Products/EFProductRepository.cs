@@ -26,11 +26,12 @@ namespace MyEShop.PersistenceEF.Products
 
         public async Task<int> CountProductByFilter(string filter)
         {
-            return await _set.CountAsync(
-                _ => EF.Functions.Like(_.Title, $"%{filter}%")
+            return await _set
+                .Where(_ => EF.Functions.Like(_.Title, $"%{filter}%")
                 || EF.Functions.Like(_.ShortDescription, $"%{filter}%")
-                || EF.Functions.Like(_.Text, $"%{filter}%")
-                );
+                || EF.Functions.Like(_.Text, $"%{filter}%"))
+                .Distinct()
+                .CountAsync();
         }
 
         public void Delete(Product product)
@@ -66,21 +67,9 @@ namespace MyEShop.PersistenceEF.Products
                     Price = _.Price,
                     Text = _.Text,
                     Title = _.Title
-                }).ToListAsync();
-        }
-
-        public async Task<IList<GetAllProductDto>> GetAll()
-        {
-            return await _set.Select(_ => new GetAllProductDto
-            {
-                ShortDescription = _.ShortDescription,
-                CreateData = _.CreateData,
-                Id = _.Id,
-                ImageName = _.ImageName,
-                Price = _.Price,
-                Text = _.Text,
-                Title = _.Title
-            }).ToListAsync();
+                })
+                .Distinct()
+                .ToListAsync();
         }
 
         public async Task<bool> IsExistsById(int id)

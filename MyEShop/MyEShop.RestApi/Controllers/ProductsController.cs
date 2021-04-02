@@ -42,16 +42,10 @@ namespace MyEShop.RestApi.Controllers
             return await _services.GetById(id);
         }
 
-        [HttpGet("{filter}/{pageId}/{take}")]
-        public async Task<IList<GetAllProductDto>> GetAll(string filter,int pageId = 1, int take=1)
-        {
-            return await _services.GetAll(filter,pageId,take);
-        }
-
         [HttpGet]
-        public async Task<IList<GetAllProductDto>> GetAll()
+        public async Task<IList<GetAllProductDto>> GetAll(string filter,[Required]int pageId = 1)
         {
-            return await _services.GetAll();
+            return await _services.GetAll(filter,pageId);
         }
     }
 }
